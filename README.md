@@ -21,7 +21,7 @@ npm run dev       # http://localhost:8787
 Cada push a `main` dispara `.github/workflows/deploy.yml`.
 Requiere dos secrets en el repo:
 
-- `CLOUDFLARE_API_TOKEN` — token con permiso *Edit Cloudflare Workers*
-- `CLOUDFLARE_ACCOUNT_ID` — ID de la cuenta de Cloudflare
+- `API_KEY` — token de Cloudflare con permiso *Edit Cloudflare Workers*
+- `ACCOUNT_ID` — ID de la cuenta de Cloudflare
 
 Deploy manual: `npx wrangler deploy`
