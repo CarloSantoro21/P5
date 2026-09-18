@@ -1,5 +1,5 @@
 export default {
-  async fetch(request) {
+  async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
 
     if (url.pathname === "/health") {
@@ -11,4 +11,4 @@ export default {
       headers: { "content-type": "text/plain; charset=utf-8" },
     });
   },
-};
+} satisfies ExportedHandler;
