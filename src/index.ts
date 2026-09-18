@@ -6,8 +6,8 @@ export default {
       return Response.json({ status: "ok" });
     }
 
-    const name = url.searchParams.get("name") ?? "World";
-    return new Response(`Hello, ${name}!\n`, {
+    const name = url.searchParams.get("name") ?? "carluwu";
+    return new Response(`holuwu soy ${name}\n`, {
       headers: { "content-type": "text/plain; charset=utf-8" },
     });
   },

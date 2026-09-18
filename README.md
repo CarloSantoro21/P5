@@ -13,7 +13,7 @@ npm run dev       # http://localhost:8787
 
 | Ruta | Respuesta |
 | --- | --- |
-| `/` | `Hello, World!` (o `?name=Carlo` → `Hello, Carlo!`) |
+| `/` | `holuwu soy carluwu` (o `?name=Carlo` → `holuwu soy Carlo`) |
 | `/health` | `{"status":"ok"}` |
 
 ## Deploy
