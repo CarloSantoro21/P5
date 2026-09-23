@@ -1,5 +1,14 @@
-export default {
-  async fetch(request: Request): Promise<Response> {
+export interface Env {
+  p6: D1Database;
+}
+
+const worker = {
+  async getUsers(env: Env): Promise<Record<string, unknown>[]> {
+    const { results } = await env.p6.prepare("SELECT * FROM users;").all();
+    return results;
+  },
+
+  async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
     if (url.pathname === "/health") {
@@ -7,8 +16,12 @@ export default {
     }
 
     const name = url.searchParams.get("name") ?? "carluwu";
-    return new Response(`holuwu soy ${name}\n`, {
-      headers: { "content-type": "text/plain; charset=utf-8" },
-    });
+    const users = await worker.getUsers(env);
+    return new Response(
+      `holuwu soy ${name}\n\n${JSON.stringify(users, null, 2)}\n`,
+      { headers: { "content-type": "text/plain; charset=utf-8" } },
+    );
   },
-} satisfies ExportedHandler;
+};
+
+export default worker satisfies ExportedHandler<Env>;
