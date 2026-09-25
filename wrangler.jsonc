@@ -11,5 +11,17 @@
 			"database_name": "p6",
 			"database_id": "973c247a-8192-41ee-8aab-9f2bda8e2426"
 		}
-	]
+	],
+	"env": {
+		"production": {
+			"name": "p7-prod",
+			"d1_databases": [
+				{
+					"binding": "p6",
+					"database_name": "p6",
+					"database_id": "973c247a-8192-41ee-8aab-9f2bda8e2426"
+				}
+			]
+		}
+	}
 }

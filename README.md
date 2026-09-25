@@ -16,12 +16,25 @@ npm run dev       # http://localhost:8787
 | `/` | `holuwu soy carluwu` (o `?name=Carlo` → `holuwu soy Carlo`) |
 | `/health` | `{"status":"ok"}` |
 
+## Tests
+
+```bash
+npm test                # unit tests (Vitest + Workers runtime)
+npm run test:coverage   # tests + reporte de coverage en coverage/
+```
+
+Los tests corren en el runtime de Workers con una D1 local, así que no tocan la base real.
+
 ## Deploy
 
-Cada push a `main` dispara `.github/workflows/deploy.yml`.
-Requiere dos secrets en el repo:
+Cada push a `main` dispara `.github/workflows/deploy.yml`, con dos jobs:
 
-- `API_KEY` — token de Cloudflare con permiso *Edit Cloudflare Workers*
+1. **build-test**: build, unit tests con coverage, publica los artifacts `worker-build` (`dist/`) y `coverage-report`, y despliega a `p5`.
+2. **deploy-prod**: descarga `worker-build` y lo despliega al Worker `p7-prod` (entorno `production` de `wrangler.jsonc`).
+
+Ambos Workers usan la D1 `p6`. Requiere dos secrets en el repo:
+
+- `API_KEY` — token de Cloudflare con permisos *Workers Scripts: Edit* y *D1: Edit*
 - `ACCOUNT_ID` — ID de la cuenta de Cloudflare
 
-Deploy manual: `npx wrangler deploy`
+Deploy manual: `npm run deploy` (p5) o `npm run deploy:prod` (p7-prod)
