@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "lib": ["es2022", "dom"],
+    "allowImportingTsExtensions": true
+  },
+  "include": ["./**/*.ts", "../vitest.uat.config.ts"]
+}

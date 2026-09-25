@@ -83,3 +83,15 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.API_KEY }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+      - name: Run UAT against Prod
+        run: npm run test:uat
+        env:
+          UAT_ENVIRONMENT: production
+          UAT_BASE_URL: https://p7-prod.alessandrosantoro212121.workers.dev
+          UAT_REFERENCE_URL: https://p5.alessandrosantoro212121.workers.dev
+      - name: Publish UAT report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: uat-report
+          path: uat-report/
